@@ -1,0 +1,76 @@
+<div class="container" ng-controller="ProductCtrl as ctrl">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat='product in products'>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.createdAt | date:'yyyy-MM-dd' }}</td>
+                <td>
+                    <button
+                        class='btn btn-primary'
+                        data-toggle="modal"
+                        data-target="#product-info"
+                        ng-click="ctrl.editProduct(product)"
+                    >
+                        Edit
+                    </button>
+                    <button
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                        ng-click="ctrl.removeProduct(product.id)"
+                    >
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal" id="product-info">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Edit product</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form class="modal-demo">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input
+                                class="form-control"
+                                id="name"
+                                type="text"
+                                placeholder="Enter name"
+                                ng-model="product.name"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input
+                                class="form-control"
+                                id="price"
+                                type="number"
+                                placeholder="Select price"
+                                step="0.01"
+                                ng-model="product.price"
+                            >
+                        </div>
+                        <button ng-click='ctrl.updateProduct(product);' data-dismiss="modal" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-danger" data-dismiss="modal">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

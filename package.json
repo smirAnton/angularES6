@@ -1,0 +1,45 @@
+{
+  "name": "angular-app-test",
+  "version": "1.0.0",
+  "description": "Angular app",
+  "scripts": {
+    "build": "./node_modules/webpack/bin/webpack.js --bail --progress --profile",
+    "start:server": "node server.js",
+    "start:dev": "NODE_ENV=development npm run build | npm run start:server",
+    "start:prod": "NODE_ENV=production npm run build | npm run start:server"
+  },
+  "author": "Anton Smirnov",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "concurrently": "^3.1.0",
+    "express": "^4.14.0",
+    "lodash": "^4.17.4",
+    "sequelize": "^3.29.0",
+    "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {
+    "angular": "^1.5.0",
+    "angular-route": "^1.6.1",
+    "angular-ui-router": "^0.3.2",
+    "async": "^2.1.4",
+    "autoprefixer": "^6.0.3",
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-class-properties": "^6.19.0",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
+    "babel-preset-es2015": "^6.1.18",
+    "bootstrap": "^3.3.7",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.23.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.7.1",
+    "jquery": "^3.1.1",
+    "node-libs-browser": "^2.0.0",
+    "postcss-loader": "^1.1.1",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.13"
+  }
+}

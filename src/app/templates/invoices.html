@@ -1,0 +1,198 @@
+<div class="container" ng-controller="InvoiceCtrl as ctrl">
+    <button
+        class='btn btn-primary'
+        data-toggle="modal"
+        data-target="#create-product"
+        ng-click="ctrl.openProductForm()"
+    >
+        Create product
+    </button>
+    <button
+        class='btn btn-primary'
+        data-toggle="modal"
+        data-target="#create-customer"
+        ng-click="ctrl.openCustomerForm()"
+    >
+        Create customer
+    </button>
+    <button
+        class='btn btn-primary'
+        data-toggle="modal"
+        data-target="#create-invoice"
+        ng-click="ctrl.openInvoiceForm()"
+    >
+        Create invoice
+    </button>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Customer</th>
+                <th>Total</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat='invoice in invoices'>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ invoice.customer_id }}</td>
+                <td>{{ invoice.total }}</td>
+                <td>{{ invoice.createdAt | date:'yyyy-MM-dd' }}</td>
+                <td>
+                    <button
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                        ng-click="ctrl.removeInvoice(invoice.id)"
+                    >
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal" id="create-invoice">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Create Invoice</h3>
+                    <h5>Total in current invoice: {{ invoice.total }}</h5>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form class="modal-demo">
+                        <div class="form-group">
+                            <label for="discount">Discount, %</label>
+                            <input
+                                class="form-control"
+                                id="discount"
+                                type="number"
+                                placeholder="Select discount"
+                                step="1"
+                                ng-model="invoice.discount"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="products-select">Product</label>
+                            <select
+                                class="form-control"
+                                id="products-select"
+                                ng-model="invoice.product"
+                                ng-change="ctrl.onSelectProduct(invoice.product)"
+                                ng-options="product.name for product in products"
+                            >
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="customers-select">Customers</label>
+                            <select
+                                class="form-control"
+                                id="customers-select"
+                                ng-model="invoice.customer"
+                                ng-options="customer.name for customer in customers"
+                            >
+                            </select>
+                        </div>
+                        <button
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            ng-click='ctrl.createInvoice(invoice);'
+                        >
+                            Submit
+                        </button>
+                        <button class="btn btn-danger" data-dismiss="modal">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="create-product">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Create product</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form class="modal-demo">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input
+                                class="form-control"
+                                id="name"
+                                type="text"
+                                placeholder="Enter name"
+                                ng-model="product.name"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input
+                                class="form-control"
+                                id="price"
+                                ng-model="product.price"
+                                placeholder="Enter price"
+                                step="0.01"
+                                type="number"
+                            >
+                        </div>
+                        <button
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            ng-click='ctrl.createProduct(product);'
+                        >
+                            Submit
+                        </button>
+                        <button class="btn btn-danger" data-dismiss="modal">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="create-customer">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Create customer</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form class="modal-demo">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input
+                                class="form-control"
+                                id="name"
+                                type="text"
+                                placeholder="Enter name"
+                                ng-model="customer.name"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input
+                                class="form-control"
+                                id="phone"
+                                type="text"
+                                placeholder="Enter phone"
+                                ng-model="customer.phone"
+                            >
+                        </div>
+                        <button
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            ng-click='ctrl.createCustomer(customer);'
+                        >
+                            Submit
+                        </button>
+                        <button class="btn btn-danger" data-dismiss="modal">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

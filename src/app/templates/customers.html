@@ -1,0 +1,81 @@
+<div class="container" ng-controller="CustomerCtrl as ctrl">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat='customer in customers'>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.createdAt | date:'yyyy-MM-dd' }}</td>
+                <td>
+                    <button
+                        class='btn btn-primary'
+                        data-toggle="modal"
+                        data-target="#customer-info"
+                        ng-click="ctrl.editCustomer(customer)"
+                    >
+                        Edit
+                    </button>
+                    <button
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                        ng-click="ctrl.removeCustomer(customer.id)"
+                    >
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal" id="customer-info">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Edit product</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form ng-controller="ProductCtrl" class="modal-demo">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input
+                                class="form-control"
+                                id="name"
+                                type="text"
+                                placeholder="Enter name"
+                                ng-model="customer.name"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Name</label>
+                            <input
+                                class="form-control"
+                                id="phone"
+                                type="text"
+                                placeholder="Enter phone"
+                                ng-model="customer.phone"
+                            >
+                        </div>
+                        <button
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            ng-click="ctrl.updateCustomer(customer)"
+                        >
+                            Submit
+                        </button>
+                        <button class="btn btn-danger" data-dismiss="modal">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
